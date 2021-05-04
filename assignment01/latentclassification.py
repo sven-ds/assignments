@@ -14,7 +14,8 @@ def load_data(
         training=True,
         shuffle=True,
         swap=SWAP_DATA_SETS,
-        max_size=None):
+        max_size=None,
+        filename=None):
     """
     Returns a data loader for the latent-space classification task.
 
@@ -23,12 +24,16 @@ def load_data(
     :param shuffle: shuffle the data?
     :param swap: swap the training and the validation data-set?
     :param max_size: limit the number of elements in the data set
+    :param filename: filename of the data set
     :return: data loader containing the data set
     """
+    if filename is None:
+        filename = DATA_SET
+
     training = not training if swap else training
 
     data = datasets.LatentToDigit(
-        filename=DATA_SET,
+        filename=filename,
         training=training,
         max_size=max_size)
 
